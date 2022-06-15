@@ -21,9 +21,7 @@ public class EditController {
 
     @PatchMapping("/edit/{id}")
     public ResponseEntity<String> editImage(@PathVariable Long id){
-
         editService.resizeImage(id);
-
         return ResponseEntity.ok("Bildbearbeitet");
     }
 
