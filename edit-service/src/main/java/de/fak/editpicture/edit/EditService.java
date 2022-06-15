@@ -1,9 +1,12 @@
 package de.fak.editpicture.edit;
 
+import de.fak.editpicture.config.TraceBuilder;
 import de.fak.editpicture.image.ImageFile;
 import de.fak.editpicture.image.ImageFileRepository;
 import lombok.AllArgsConstructor;
 import org.bson.types.Binary;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -25,7 +28,14 @@ public class EditService {
     private ImageFileRepository imageFileRepository;
     private ImageSizeRepository imageSizeRepository;
 
+    private Logger logger;
+
+    @Autowired
+    private TraceBuilder traceBuilder;
+
     public void resizeImage(Long id) {
+        traceBuilder.waitFor("EditService","resizeImage");
+        logger.info("in ImageFileController called resizeImage");
         Optional<ImageFile> optionalImageFile = getImageById(id);
         ImageSize imageSize = new ImageSize();
         imageSize.setId(id);
@@ -35,6 +45,8 @@ public class EditService {
     }
 
     private ImageFile propertyToImage(Optional<ImageFile> optionalImageFile,ImageProperties property) {
+        traceBuilder.waitFor("EditService","propertyToImage");
+        logger.info("in ImageFileController called editImage");
         Binary content = null;
         ImageFile imageFile = null;
         if(optionalImageFile.isPresent()){
@@ -60,11 +72,15 @@ public class EditService {
     }
 
     public Optional<ImageFile> getImageById(long id) {
+        traceBuilder.waitFor("EditService","getImageById");
+        logger.info("in ImageFileController called getImageById");
         Optional<ImageFile> optionalImageFile = imageFileRepository.findById(id);
         return optionalImageFile;
     }
 
     public Optional<ImageSize> getImageSizeById(Long id) {
+        logger.info("in ImageFileController called getImageSizeById");
+        traceBuilder.waitFor("EditService","getImageSizeById");
         return imageSizeRepository.findById(id);
     }
 }

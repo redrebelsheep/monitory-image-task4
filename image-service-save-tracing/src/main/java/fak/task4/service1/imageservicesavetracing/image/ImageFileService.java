@@ -1,8 +1,12 @@
 package fak.task4.service1.imageservicesavetracing.image;
 
+import fak.task4.service1.imageservicesavetracing.config.TraceBuilder;
 import fak.task4.service1.imageservicesavetracing.sequence.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
 import org.bson.types.Binary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +28,14 @@ public class ImageFileService {
   private ImageFileRepository imageRepository;
   private SequenceGeneratorService sequenceGeneratorService;
 
+  private Logger logger;
+
+  @Autowired
+  private TraceBuilder traceBuilder;
+
   public long saveImage(MultipartFile file) {
+    logger.info("in ImageFileService called saveImage");
+    traceBuilder.waitFor("ImageFileService","saveImage");
     try {
       ImageFile imageFile =
           ImageFile.builder()

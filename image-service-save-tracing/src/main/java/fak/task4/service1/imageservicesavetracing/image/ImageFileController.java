@@ -1,18 +1,19 @@
 package fak.task4.service1.imageservicesavetracing.image;
 
 
+import fak.task4.service1.imageservicesavetracing.config.TraceBuilder;
 import lombok.AllArgsConstructor;
 import okhttp3.*;
 import okhttp3.RequestBody;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.IOException;
-import java.net.URI;
 
 @AllArgsConstructor
 @RestController
@@ -21,8 +22,15 @@ public class ImageFileController {
     private ImageFileService imageFileService;
     private final OkHttpClient client;
 
+    @Autowired
+    private TraceBuilder traceBuilder;
+
+    private Logger logger;
+
     @PostMapping("/image")
     public ResponseEntity<String> updateImage(@RequestParam MultipartFile file) throws IOException {
+        traceBuilder.waitFor("ImageFileController","updateImage");
+        logger.info("in ImageFileController called updateImage");
        long id =  imageFileService.saveImage(file);
         Response response = getResponse(id);
         response.code();
@@ -35,6 +43,8 @@ public class ImageFileController {
 
     @NotNull
     private Response getResponse(Long id) throws IOException {
+        traceBuilder.waitFor("ImageFileController","getResponse");
+        logger.info("in ImageFileController called getResponse");
         HttpUrl route = HttpUrl.parse("http://localhost:8082/edit/" + id);
         RequestBody formBody = new FormBody.Builder()
                 .add("id", String.valueOf(id))
