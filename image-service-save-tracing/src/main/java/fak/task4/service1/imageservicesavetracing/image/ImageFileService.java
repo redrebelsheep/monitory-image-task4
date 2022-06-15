@@ -41,27 +41,27 @@ public class ImageFileService {
     }
   }
 
-  public Resource getImageById(long id) {
-    Optional<ImageFile> optionalImageFile = imageRepository.findById(id);
-    Resource image = null;
-    if(optionalImageFile.isPresent()){
-      //      image = (Resource) optionalImageFile.get();
-      String name = optionalImageFile.get().getName();
-      String originalFileName = optionalImageFile.get().getName();
-      String contentType = optionalImageFile.get().getContentType();
-      Binary content =  optionalImageFile.get().getContent();
-      InputStream is = new ByteArrayInputStream(content.getData());
-
-      try {
-        BufferedImage newBufferdImage = ImageIO.read(is);
-        newBufferdImage.get
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-//      MultipartFile result = new MockMultipartFile(name,
-//                                                   originalFileName, contentType, content);
-
-    }
-    return image;
-  }
+////  public Resource getImageById(long id) {
+////    Optional<ImageFile> optionalImageFile = imageRepository.findById(id);
+////    Resource image = null;
+////    if(optionalImageFile.isPresent()){
+////      //      image = (Resource) optionalImageFile.get();
+////      String name = optionalImageFile.get().getName();
+////      String originalFileName = optionalImageFile.get().getName();
+////      String contentType = optionalImageFile.get().getContentType();
+////      Binary content =  optionalImageFile.get().getContent();
+////      InputStream is = new ByteArrayInputStream(content.getData());
+////
+////      try {
+////        BufferedImage newBufferdImage = ImageIO.read(is);
+////        newBufferdImage.get
+////      } catch (IOException e) {
+////        e.printStackTrace();
+////      }
+//////      MultipartFile result = new MockMultipartFile(name,
+//////                                                   originalFileName, contentType, content);
+////
+////    }
+//    return image;
+//  }
 }
