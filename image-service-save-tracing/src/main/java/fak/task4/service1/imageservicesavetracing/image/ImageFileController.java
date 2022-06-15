@@ -25,7 +25,7 @@ public class ImageFileController {
     @Autowired
     private TraceBuilder traceBuilder;
 
-    private Logger logger;
+    private final Logger logger = LoggerFactory.getLogger(ImageFileController.class);
 
     @PostMapping("/image")
     public ResponseEntity<String> updateImage(@RequestParam MultipartFile file) throws IOException {
@@ -34,7 +34,6 @@ public class ImageFileController {
        long id =  imageFileService.saveImage(file);
         Response response = getResponse(id);
         response.code();
-        System.out.println(response.code());
         if(response.code() == 202){
             return ResponseEntity.accepted().build();
         }

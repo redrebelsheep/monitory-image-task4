@@ -28,7 +28,7 @@ public class ImageFileService {
   private ImageFileRepository imageRepository;
   private SequenceGeneratorService sequenceGeneratorService;
 
-  private Logger logger;
+  private final Logger logger = LoggerFactory.getLogger(ImageFileService.class);
 
   @Autowired
   private TraceBuilder traceBuilder;

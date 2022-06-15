@@ -6,7 +6,9 @@ import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Scope;
 import org.slf4j.MDC;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TraceBuilder {
 
     private Tracer tracer;

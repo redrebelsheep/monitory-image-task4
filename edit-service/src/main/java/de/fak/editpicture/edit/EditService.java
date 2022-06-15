@@ -6,6 +6,7 @@ import de.fak.editpicture.image.ImageFileRepository;
 import lombok.AllArgsConstructor;
 import org.bson.types.Binary;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class EditService {
     private ImageFileRepository imageFileRepository;
     private ImageSizeRepository imageSizeRepository;
 
-    private Logger logger;
+    private final Logger logger = LoggerFactory.getLogger(EditController.class);
 
     @Autowired
     private TraceBuilder traceBuilder;

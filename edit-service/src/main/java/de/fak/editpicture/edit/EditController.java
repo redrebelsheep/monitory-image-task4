@@ -3,6 +3,7 @@ package de.fak.editpicture.edit;
 import de.fak.editpicture.config.TraceBuilder;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,8 @@ import java.util.Optional;
 public class EditController {
 
     private EditService editService;
-    private Logger logger;
+
+    private final Logger logger = LoggerFactory.getLogger(EditController.class);
 
     @Autowired
     private TraceBuilder traceBuilder;

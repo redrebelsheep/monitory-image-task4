@@ -8,7 +8,7 @@
         </layout>
     </appender>
     <appender name="json" class="ch.qos.logback.core.FileAppender">
-        <file>/Users/vw23fue/observability_monitoring/logs/picture.log</file>
+        <file>../logs/picture.log</file>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         </encoder>
     </appender>
