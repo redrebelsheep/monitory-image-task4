@@ -4,10 +4,7 @@ import de.fak.editpicture.image.ImageFile;
 import de.fak.editpicture.image.ImageFileRepository;
 import lombok.AllArgsConstructor;
 import org.bson.types.Binary;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -67,4 +64,7 @@ public class EditService {
         return optionalImageFile;
     }
 
+    public Optional<ImageSize> getImageSizeById(Long id) {
+        return imageSizeRepository.findById(id);
+    }
 }

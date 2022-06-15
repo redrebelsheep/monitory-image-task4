@@ -24,7 +24,7 @@ public class ImageFileService {
   private ImageFileRepository imageRepository;
   private SequenceGeneratorService sequenceGeneratorService;
 
-  public void saveImage(MultipartFile file) {
+  public long saveImage(MultipartFile file) {
     try {
       ImageFile imageFile =
           ImageFile.builder()
@@ -36,9 +36,11 @@ public class ImageFileService {
               .build();
         imageFile.setId(sequenceGeneratorService.generateSequence(ImageFile.SEQUENCE_NAME));
         imageRepository.save(imageFile);
+        return imageFile.getId();
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return 0;
   }
 
 ////  public Resource getImageById(long id) {
